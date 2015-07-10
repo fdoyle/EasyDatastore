@@ -5,21 +5,19 @@ import android.content.SharedPreferences;
 /**
  * Created by fdoyle on 7/10/15.
  */
-public class IntEntry {
+public class LongEntry {
     SharedPreferences preferences;
     String key;
-
-    public IntEntry(SharedPreferences preferences, String key) {
+    public LongEntry(SharedPreferences preferences, String key) {
         this.preferences = preferences;
         this.key = key;
     }
 
-    public int get(int def) {
-        return preferences.getInt(key, def);
+    public Long get(long def) {
+        return preferences.getLong(key, def);
     }
 
-
-    public void put(int value) {
-        preferences.edit().putInt(key, value).commit();
+    public void put(long value) {
+        preferences.edit().putLong(key, value).commit();
     }
 }
