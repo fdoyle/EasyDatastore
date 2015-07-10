@@ -1,6 +1,9 @@
 package com.lacronicus.easydatastore;
 
-import com.lacronicus.easydatastorelib.Entry;
+import com.lacronicus.easydatastorelib.BooleanEntry;
+import com.lacronicus.easydatastorelib.IntEntry;
+import com.lacronicus.easydatastorelib.ObjectEntry;
+import com.lacronicus.easydatastorelib.StringEntry;
 import com.lacronicus.easydatastorelib.Preference;
 
 /**
@@ -9,8 +12,17 @@ import com.lacronicus.easydatastorelib.Preference;
 public interface MyDatastore {
 
     @Preference("foo")
-    Entry foo();
+    StringEntry foo();
 
     @Preference("bar")
-    Entry bar();
+    StringEntry bar();
+
+    @Preference("baz")
+    IntEntry myInt();
+
+    @Preference("boolean")
+    BooleanEntry myBoolean();
+
+    @Preference("object")
+    ObjectEntry<MyModel> myModel();
 }

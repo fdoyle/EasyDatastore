@@ -2,38 +2,36 @@ package com.lacronicus.easydatastorelib;
 
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 
 /**
- package com.derp.easyprefslib;
-
- import android.content.SharedPreferences;
-
- import java.lang.reflect.InvocationHandler;
- import java.lang.reflect.Method;
- import java.lang.reflect.Proxy;
-
- /**
  * Created by fdoyle on 7/10/15.
  */
 public class DatastoreAdapter {
     SharedPreferences preferences;
+    Gson gson;
 
-    public DatastoreAdapter(SharedPreferences preferences) {
+    public DatastoreAdapter(SharedPreferences preferences, Gson gson) {
         this.preferences = preferences;
+        this.gson = gson;
     }
 
 
     public <T> T create(Class<T> service) {
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[]{service},
-                new DatastoreHandler(preferences));
+                new DatastoreHandler(preferences, gson));
     }
 
 
     public static class Builder {
         SharedPreferences preferences;
+        Gson gson;
 
         public Builder() {
 
@@ -44,23 +42,48 @@ public class DatastoreAdapter {
             return this;
         }
 
+        public Builder setGson(Gson gson) {
+            this.gson = gson;
+            return this;
+        }
+
         public DatastoreAdapter build() {
-            return new DatastoreAdapter(preferences);
+            if(gson == null){
+                gson = new Gson();
+            }
+            return new DatastoreAdapter(preferences, gson);
         }
     }
 
-    private class DatastoreHandler implements InvocationHandler {
+    private static class DatastoreHandler implements InvocationHandler {
         SharedPreferences preferences;
+        Gson gson;
 
-        public DatastoreHandler(SharedPreferences preferences) {
+        public DatastoreHandler(SharedPreferences preferences, Gson gson) {
             this.preferences = preferences;
+            this.gson = gson;
         }
 
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             String key = method.getAnnotation(Preference.class).value();
-            return new Entry(preferences, key);
+            if (method.getReturnType().equals(StringEntry.class)) {
+                return new StringEntry(preferences, key);
+            } else if (method.getReturnType().equals(IntEntry.class)) {
+                return new IntEntry(preferences, key);
+            } else if (method.getReturnType().equals(BooleanEntry.class)) {
+                return new BooleanEntry(preferences, key);
+            } else if (method.getReturnType().equals(ObjectEntry.class)) {
+                if(method.getGenericReturnType() instanceof ParameterizedType) {
+                    ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
+                    Class<?> type = (Class) parameterizedType.getActualTypeArguments()[0];
+                    return new ObjectEntry<>(type, gson, preferences, key);
+                }
+                throw new RuntimeException("ObjectEntries must have a parameter");
+            } else {
+                return null;
+            }
         }
     }
 }

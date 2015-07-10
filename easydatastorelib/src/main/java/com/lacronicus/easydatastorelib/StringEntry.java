@@ -5,10 +5,10 @@ import android.content.SharedPreferences;
 /**
  * Created by fdoyle on 7/10/15.
  */
-public class Entry {
+public class StringEntry {
     SharedPreferences preferences;
     String key;
-    public Entry(SharedPreferences preferences, String key) {
+    public StringEntry(SharedPreferences preferences, String key) {
         this.preferences = preferences;
         this.key = key;
     }
