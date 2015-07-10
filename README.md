@@ -10,11 +10,21 @@ You create an interface like:
 public interface MyDatastore {
 
     @Preference("foo")
-    Entry foo();
+    StringEntry foo();
 
     @Preference("bar")
-    Entry bar();
+    StringEntry bar();
+
+    @Preference("baz")
+    IntEntry myInt();
+
+    @Preference("boolean")
+    BooleanEntry myBoolean();
+
+    @Preference("object")
+    ObjectEntry<MyModel> myModel();
 }
+
 ```
 
 Then create your Datastore like 
