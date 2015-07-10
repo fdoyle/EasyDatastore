@@ -35,4 +35,4 @@ datastore.bar().put("Hello World");
 String bar = datastore.bar().get();
 ```
 
-In the future, it will support things other than strings, like ints and booleans. Maybe someday it'll support plain objects through gson. 
+It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
