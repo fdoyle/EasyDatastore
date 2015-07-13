@@ -1,8 +1,7 @@
 # EasyDatastore
 Easy way to handle shared preferences
 
-
-It's pretty much retrofit for your shared preferences
+It's pretty much retrofit for sharedprefs. 
 
 You create an interface like:
 
