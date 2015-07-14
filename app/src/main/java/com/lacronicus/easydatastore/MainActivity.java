@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.lacronicus.easydatastorelib.DatastoreAdapter;
+import com.lacronicus.easydatastorelib.DatastoreBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -16,9 +16,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MyDatastore datastore = new DatastoreAdapter.Builder()
-                .setSharedPrefs(PreferenceManager.getDefaultSharedPreferences(this))
-                .build()
+
+
+        MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(this))
                 .create(MyDatastore.class);
 
         datastore.bar().put("Hello World");

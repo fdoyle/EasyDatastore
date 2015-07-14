@@ -18,6 +18,6 @@ public class LongEntry {
     }
 
     public void put(long value) {
-        preferences.edit().putLong(key, value).commit();
+        preferences.edit().putLong(key, value).apply();
     }
 }

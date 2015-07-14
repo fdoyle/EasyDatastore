@@ -10,7 +10,6 @@ import com.lacronicus.easydatastorelib.Preference;
  * Created by fdoyle on 7/10/15.
  */
 public interface MyDatastore {
-
     @Preference("foo")
     StringEntry foo();
 

@@ -18,6 +18,6 @@ public class BooleanEntry {
     }
 
     public void put(boolean value) {
-        preferences.edit().putBoolean(key, value).commit();
+        preferences.edit().putBoolean(key, value).apply();
     }
 }

@@ -25,6 +25,6 @@ public class ObjectEntry<T> {
     }
 
     public void put(T value) {
-        preferences.edit().putString(key, gson.toJson(value)).commit();
+        preferences.edit().putString(key, gson.toJson(value)).apply();
     }
 }

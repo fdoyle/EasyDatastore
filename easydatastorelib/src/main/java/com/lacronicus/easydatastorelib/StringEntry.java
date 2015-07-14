@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 public class StringEntry {
     SharedPreferences preferences;
     String key;
+
     public StringEntry(SharedPreferences preferences, String key) {
         this.preferences = preferences;
         this.key = key;
@@ -18,6 +19,6 @@ public class StringEntry {
     }
 
     public void put(String value) {
-        preferences.edit().putString(key, value).commit();
+        preferences.edit().putString(key, value).apply();
     }
 }

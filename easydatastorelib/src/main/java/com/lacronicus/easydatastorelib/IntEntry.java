@@ -20,6 +20,6 @@ public class IntEntry {
 
 
     public void put(int value) {
-        preferences.edit().putInt(key, value).commit();
+        preferences.edit().putInt(key, value).apply();
     }
 }

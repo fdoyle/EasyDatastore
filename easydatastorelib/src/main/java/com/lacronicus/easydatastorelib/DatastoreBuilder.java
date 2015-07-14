@@ -8,51 +8,29 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
-import java.lang.reflect.Type;
 
 /**
  * Created by fdoyle on 7/10/15.
  */
-public class DatastoreAdapter {
+public class DatastoreBuilder {
     SharedPreferences preferences;
     Gson gson;
 
-    public DatastoreAdapter(SharedPreferences preferences, Gson gson) {
+    public DatastoreBuilder(SharedPreferences preferences) {
         this.preferences = preferences;
-        this.gson = gson;
     }
 
+    public DatastoreBuilder setGson(Gson gson) {
+        this.gson = gson;
+        return this;
+    }
 
     public <T> T create(Class<T> service) {
+        if(gson == null) {
+            gson = new Gson();
+        }
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[]{service},
                 new DatastoreHandler(preferences, gson));
-    }
-
-
-    public static class Builder {
-        SharedPreferences preferences;
-        Gson gson;
-
-        public Builder() {
-
-        }
-
-        public Builder setSharedPrefs(SharedPreferences preferences) {
-            this.preferences = preferences;
-            return this;
-        }
-
-        public Builder setGson(Gson gson) {
-            this.gson = gson;
-            return this;
-        }
-
-        public DatastoreAdapter build() {
-            if(gson == null){
-                gson = new Gson();
-            }
-            return new DatastoreAdapter(preferences, gson);
-        }
     }
 
     private static class DatastoreHandler implements InvocationHandler {
@@ -63,7 +41,6 @@ public class DatastoreAdapter {
             this.preferences = preferences;
             this.gson = gson;
         }
-
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

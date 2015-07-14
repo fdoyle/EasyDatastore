@@ -19,6 +19,6 @@ public class FloatEntry {
     }
 
     public void put(float value) {
-        preferences.edit().putFloat(key, value).commit();
+        preferences.edit().putFloat(key, value).apply();
     }
 }
