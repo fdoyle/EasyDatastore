@@ -78,6 +78,7 @@ bintray{
     pkg {
         repo = "maven"
         name = "EasyDatastore"
+        vcsUrl = gitUrl
         websiteUrl = siteUrl
         licenses = ["Apache-2.0"]
         publish = true
