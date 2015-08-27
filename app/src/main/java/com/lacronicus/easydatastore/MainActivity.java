@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
         Log.d("APP", pulledModel.toString());
 
 
+
     }
 
     @Override
