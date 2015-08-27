@@ -1,8 +1,7 @@
 # EasyDatastore
 Easy way to handle shared preferences
 
-
-It's pretty much retrofit for your shared preferences
+It's pretty much retrofit for sharedprefs. 
 
 You create an interface like:
 
@@ -10,11 +9,21 @@ You create an interface like:
 public interface MyDatastore {
 
     @Preference("foo")
-    Entry foo();
+    StringEntry foo();
 
     @Preference("bar")
-    Entry bar();
+    StringEntry bar();
+
+    @Preference("baz")
+    IntEntry myInt();
+
+    @Preference("boolean")
+    BooleanEntry myBoolean();
+
+    @Preference("object")
+    ObjectEntry<MyModel> myModel();
 }
+
 ```
 
 Then create your Datastore like 
@@ -35,4 +44,6 @@ datastore.bar().put("Hello World");
 String bar = datastore.bar().get();
 ```
 
-In the future, it will support things other than strings, like ints and booleans. Maybe someday it'll support plain objects through gson. 
+It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
+
+I'm hoping to figure out a way to allow for edit chaining with a single apply, but I'm kind of stumped for a solution. 
