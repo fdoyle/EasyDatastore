@@ -44,4 +44,6 @@ String bar = datastore.bar().get();
 
 It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
 
-I'm hoping to figure out a way to allow for edit chaining with a single apply, but I'm kind of stumped for a solution. 
+Todo:
+multiple changes in a single apply?
+throw exception if multiple methods share the same key?
