@@ -1,4 +1,11 @@
 # EasyDatastore
+
+```
+compile 'com.lacronicus:easydatastorelib:+'
+latest: 
+compile 'com.lacronicus:easydatastorelib:1.0.1'
+```
+
 Every app I write has a wrapper object responsible for pushing/pulling data to/from sharedprefs. Usually, it's mostly copied from the last time I wrote one, which often leads to mismatched keys for reading and writing, or two writes having the same key, stupid stuff like that. No more. 
 
 With this setup, working with sharedprefs becomes pretty trivial and, because it's all based on an interface, mocking it out is easy too (thanks Retrofit). 
