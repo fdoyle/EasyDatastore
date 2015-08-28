@@ -29,9 +29,7 @@ public interface MyDatastore {
 Then create your Datastore like 
 
 ```
-MyDatastore datastore = new DatastoreAdapter.Builder()
-                .setSharedPrefs(PreferenceManager.getDefaultSharedPreferences(this))
-                .build()
+MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(context))
                 .create(MyDatastore.class);
 ```
 
