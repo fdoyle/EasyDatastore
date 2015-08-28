@@ -1,9 +1,9 @@
 # EasyDatastore
-Easy way to handle shared preferences
+Every app I write has a wrapper object responsible for pushing/pulling data to/from sharedprefs. Usually, it's mostly copied from the last time I wrote one, which usually led to mismatched keys for reading and writing, or two writes having the same key, stupid stuff like that. 
 
-It's pretty much retrofit for sharedprefs. 
+With this setup, working with sharedprefs becomes pretty trivial and, because it's all based on an interface, mocking it out is easy too (thanks Retrofit). 
 
-You create an interface like:
+Your interface should look like:
 
 ```
 public interface MyDatastore {
@@ -26,7 +26,7 @@ public interface MyDatastore {
 
 ```
 
-Then create your Datastore like 
+Then create your "Datastore" like 
 
 ```
 MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(context))
