@@ -3,7 +3,7 @@
 ```
 compile 'com.lacronicus:easydatastorelib:+'
 latest: 
-compile 'com.lacronicus:easydatastorelib:1.0.1'
+compile 'com.lacronicus:easydatastorelib:1.0.2'
 ```
 
 Every app I write has a wrapper object responsible for pushing/pulling data to/from sharedprefs. Usually, it's mostly copied from the last time I wrote one, which often leads to mismatched keys for reading and writing, or two writes having the same key, stupid stuff like that. No more. 
