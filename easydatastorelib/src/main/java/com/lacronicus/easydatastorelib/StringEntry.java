@@ -18,6 +18,10 @@ public class StringEntry {
         return preferences.getString(key, defaultValue);
     }
 
+    public String get() {
+        return preferences.getString(key, null);
+    }
+
     public void put(String value) {
         preferences.edit().putString(key, value).apply();
     }

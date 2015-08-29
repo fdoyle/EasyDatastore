@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
                 .create(MyDatastore.class);
 
         datastore.bar().put("Hello World");
-        String bar = datastore.bar().get(null);
+        String bar = datastore.bar().get();
         Log.d("APP", bar);
         Toast.makeText(this, bar, Toast.LENGTH_SHORT).show();
 
