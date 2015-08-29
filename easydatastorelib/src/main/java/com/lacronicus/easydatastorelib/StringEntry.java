@@ -14,8 +14,8 @@ public class StringEntry {
         this.key = key;
     }
 
-    public String get() {
-        return preferences.getString(key, null);
+    public String get(String defaultValue) {
+        return preferences.getString(key, defaultValue);
     }
 
     public void put(String value) {
