@@ -1,8 +1,8 @@
 # EasyDatastore
 
-```
+``` groovy
 compile 'com.lacronicus:easydatastorelib:+'
-latest: 
+// latest: 
 compile 'com.lacronicus:easydatastorelib:1.0.1'
 ```
 
@@ -12,7 +12,7 @@ With this setup, working with sharedprefs becomes pretty trivial and, because it
 
 Your interface should look like:
 
-```
+``` java
 public interface MyDatastore {
 
     @Preference("foo")
@@ -35,7 +35,7 @@ public interface MyDatastore {
 
 Then create your "Datastore" like 
 
-```
+``` java
 MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(context))
                 .create(MyDatastore.class);
 ```
@@ -43,14 +43,14 @@ MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedP
 
 Then you can do 
 
-```
+``` java
 datastore.bar().put("Hello World");
 
 String bar = datastore.bar().get();
 ```
 
-It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
+It now also supports all your basic types (`String`, `int`, `boolean`, `float`, `long`) as well as objects via Gson. 
 
-Todo:
-multiple changes in a single apply?
-throw exception if multiple methods share the same key?
+# TODO:
+* multiple changes in a single apply?
+* throw exception if multiple methods share the same key?
