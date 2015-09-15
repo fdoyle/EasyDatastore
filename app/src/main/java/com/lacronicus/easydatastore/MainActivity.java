@@ -30,6 +30,14 @@ public class MainActivity extends ActionBarActivity {
         int myInt = datastore.myInt().get(-1);
         Log.d("APP", "" + myInt);
 
+        datastore.myFloat().put(2.4f);
+        float myFloat = datastore.myFloat().get(-1);
+        Log.d("APP", "" + myFloat);
+
+        datastore.myLong().put(Long.MAX_VALUE);
+        long myLong = datastore.myLong().get(-1);
+        Log.d("APP", "" + myLong);
+
         datastore.myBoolean().put(true);
         boolean mybool = datastore.myBoolean().get(false);
         Log.d("APP", "" + mybool);
@@ -38,9 +46,6 @@ public class MainActivity extends ActionBarActivity {
         datastore.myModel().put(model);
         MyModel pulledModel = datastore.myModel().get();
         Log.d("APP", pulledModel.toString());
-
-
-
     }
 
     @Override
