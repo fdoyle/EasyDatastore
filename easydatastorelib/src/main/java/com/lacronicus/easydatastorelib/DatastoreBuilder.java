@@ -47,6 +47,8 @@ public class DatastoreBuilder {
             String key = method.getAnnotation(Preference.class).value();
             if (method.getReturnType().equals(StringEntry.class)) {
                 return new StringEntry(preferences, key);
+            } else if (method.getReturnType().equals(FloatEntry.class)) {
+                return new FloatEntry(preferences, key);
             } else if (method.getReturnType().equals(LongEntry.class)) {
                 return new LongEntry(preferences, key);
             } else if (method.getReturnType().equals(IntEntry.class)) {
