@@ -9,9 +9,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 
-/**
- * Created by fdoyle on 7/10/15.
- */
 public class DatastoreBuilder {
     SharedPreferences preferences;
     Gson gson;
@@ -44,22 +41,29 @@ public class DatastoreBuilder {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            String key = method.getAnnotation(Preference.class).value();
+            Preference annotation = method.getAnnotation(Preference.class);
+            String key = annotation.value();
+            String defaultString = annotation.defaultString();
+            boolean defaultBoolean = annotation.defaultBoolean();
+            int defaultInt = annotation.defaultInt();
+            long defaultLong = annotation.defaultLong();
+            float defaultFloat = annotation.defaultFloat();
+
             if (method.getReturnType().equals(StringEntry.class)) {
-                return new StringEntry(preferences, key);
+                return new StringEntry(preferences, key, defaultString);
             } else if (method.getReturnType().equals(FloatEntry.class)) {
-                return new FloatEntry(preferences, key);
+                return new FloatEntry(preferences, key, defaultFloat);
             } else if (method.getReturnType().equals(LongEntry.class)) {
-                return new LongEntry(preferences, key);
+                return new LongEntry(preferences, key, defaultLong);
             } else if (method.getReturnType().equals(IntEntry.class)) {
-                return new IntEntry(preferences, key);
+                return new IntEntry(preferences, key, defaultInt);
             } else if (method.getReturnType().equals(BooleanEntry.class)) {
-                return new BooleanEntry(preferences, key);
+                return new BooleanEntry(preferences, key, defaultBoolean);
             } else if (method.getReturnType().equals(ObjectEntry.class)) {
-                if(method.getGenericReturnType() instanceof ParameterizedType) {
+                if (method.getGenericReturnType() instanceof ParameterizedType) {
                     ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
                     Class<?> type = (Class) parameterizedType.getActualTypeArguments()[0];
-                    return new ObjectEntry<>(type, gson, preferences, key);
+                    return new ObjectEntry<>(preferences, key, gson, type);
                 }
                 throw new RuntimeException("ObjectEntries must have a parameter");
             } else {

@@ -2,23 +2,24 @@ package com.lacronicus.easydatastorelib;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by fdoyle on 7/10/15.
- */
-public class FloatEntry {
-    SharedPreferences preferences;
-    String key;
+public class FloatEntry extends PreferenceEntry<Float> {
 
-    public FloatEntry(SharedPreferences preferences, String key) {
-        this.preferences = preferences;
-        this.key = key;
+    public FloatEntry(SharedPreferences preferences, String key, Float defaultValue) {
+        super(preferences, key, defaultValue);
     }
 
-    public float get(float def) {
-        return preferences.getFloat(key, def);
+    @Override
+    public Float get() {
+        return preferences.getFloat(key, defaultValue);
     }
 
-    public void put(float value) {
+    @Override
+    public Float get(Float runtimeDefaultValue) {
+        return preferences.getFloat(key, runtimeDefaultValue);
+    }
+
+    @Override
+    public void put(Float value) {
         preferences.edit().putFloat(key, value).apply();
     }
 }

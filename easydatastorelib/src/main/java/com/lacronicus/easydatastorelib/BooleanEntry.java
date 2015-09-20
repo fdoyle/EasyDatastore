@@ -2,22 +2,24 @@ package com.lacronicus.easydatastorelib;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by fdoyle on 7/10/15.
- */
-public class BooleanEntry {
-    SharedPreferences preferences;
-    String key;
-    public BooleanEntry(SharedPreferences preferences, String key) {
-        this.preferences = preferences;
-        this.key = key;
+public class BooleanEntry extends PreferenceEntry<Boolean> {
+
+    public BooleanEntry(SharedPreferences preferences, String key, Boolean defaultValue) {
+        super(preferences, key, defaultValue);
     }
 
-    public boolean get(boolean def) {
-        return preferences.getBoolean(key, def);
+    @Override
+    public Boolean get() {
+        return preferences.getBoolean(key, defaultValue);
     }
 
-    public void put(boolean value) {
+    @Override
+    public Boolean get(Boolean runtimeDefaultValue) {
+        return preferences.getBoolean(key, runtimeDefaultValue);
+    }
+
+    @Override
+    public void put(Boolean value) {
         preferences.edit().putBoolean(key, value).apply();
     }
 }

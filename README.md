@@ -18,7 +18,7 @@ public interface MyDatastore {
     @Preference("foo")
     StringEntry foo();
 
-    @Preference("bar")
+    @Preference(value = "bar", defaultString = "foo")
     StringEntry bar();
 
     @Preference("baz")
@@ -49,7 +49,11 @@ datastore.bar().put("Hello World");
 String bar = datastore.bar().get();
 ```
 
-It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
+It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson.
+ 
+## Dynamic default values
+ In Java it's only possible to use constant values as attribute values in annotations. 
+ To overcome this limitation, you can now call `get(someNonconstantValue)` for each type of entries in addition to the usual `get()` that uses the default value you provide in `Preference(value = "bar", defaultString = "foo")`.
 
 Todo:
 multiple changes in a single apply?
