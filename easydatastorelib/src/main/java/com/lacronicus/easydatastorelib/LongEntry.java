@@ -2,22 +2,24 @@ package com.lacronicus.easydatastorelib;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by fdoyle on 7/10/15.
- */
-public class LongEntry {
-    SharedPreferences preferences;
-    String key;
-    public LongEntry(SharedPreferences preferences, String key) {
-        this.preferences = preferences;
-        this.key = key;
+public class LongEntry extends PreferenceEntry<Long> {
+
+    public LongEntry(SharedPreferences preferences, String key, Long defaultValue) {
+        super(preferences, key, defaultValue);
     }
 
-    public Long get(long def) {
-        return preferences.getLong(key, def);
+    @Override
+    public Long get() {
+        return preferences.getLong(key, defaultValue);
     }
 
-    public void put(long value) {
+    @Override
+    public Long get(Long runtimeDefaultValue) {
+        return preferences.getLong(key, runtimeDefaultValue);
+    }
+
+    @Override
+    public void put(Long value) {
         preferences.edit().putLong(key, value).apply();
     }
 }

@@ -2,24 +2,24 @@ package com.lacronicus.easydatastorelib;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by fdoyle on 7/10/15.
- */
-public class IntEntry {
-    SharedPreferences preferences;
-    String key;
+public class IntEntry extends PreferenceEntry<Integer> {
 
-    public IntEntry(SharedPreferences preferences, String key) {
-        this.preferences = preferences;
-        this.key = key;
+    public IntEntry(SharedPreferences preferences, String key, Integer defaultValue) {
+        super(preferences, key, defaultValue);
     }
 
-    public int get(int def) {
-        return preferences.getInt(key, def);
+    @Override
+    public Integer get() {
+        return preferences.getInt(key, defaultValue);
     }
 
+    @Override
+    public Integer get(Integer runtimeDefaultValue) {
+        return preferences.getInt(key, runtimeDefaultValue);
+    }
 
-    public void put(int value) {
+    @Override
+    public void put(Integer value) {
         preferences.edit().putInt(key, value).apply();
     }
 }
