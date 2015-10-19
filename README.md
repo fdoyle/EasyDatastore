@@ -51,6 +51,8 @@ String bar = datastore.bar().get();
 
 It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
 
+If no `@Preference` annotation is supplied, EasyDatastore will use the name of the method as the shared preferences key
+
 Todo:
 multiple changes in a single apply?
 throw exception if multiple methods share the same key?
