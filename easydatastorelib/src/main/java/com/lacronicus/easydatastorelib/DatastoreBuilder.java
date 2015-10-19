@@ -44,7 +44,10 @@ public class DatastoreBuilder {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            String key = method.getAnnotation(Preference.class).value();
+            Preference preference = method.getAnnotation(Preference.class);
+            boolean hasPreferenceValue = preference != null && preference.value() != null;
+
+            String key = hasPreferenceValue ? preference.value() : method.getName();
             if (method.getReturnType().equals(StringEntry.class)) {
                 return new StringEntry(preferences, key);
             } else if (method.getReturnType().equals(FloatEntry.class)) {

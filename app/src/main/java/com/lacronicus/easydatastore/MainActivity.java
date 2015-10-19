@@ -12,6 +12,8 @@ import com.lacronicus.easydatastorelib.DatastoreBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
+    private static final String TAG = "APP";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,32 +22,36 @@ public class MainActivity extends ActionBarActivity {
 
         MyDatastore datastore = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(this))
                 .create(MyDatastore.class);
+        
+        datastore.myPrefWithNoExplicitName().put("Hello, no explicit preference name!");
+        String myPrefWithNoExplicitName = datastore.myPrefWithNoExplicitName().get();
+        Log.d(TAG, myPrefWithNoExplicitName);
 
         datastore.bar().put("Hello World");
         String bar = datastore.bar().get();
-        Log.d("APP", bar);
+        Log.d(TAG, bar);
         Toast.makeText(this, bar, Toast.LENGTH_SHORT).show();
 
         datastore.myInt().put(2);
         int myInt = datastore.myInt().get(-1);
-        Log.d("APP", "" + myInt);
+        Log.d(TAG, "" + myInt);
 
         datastore.myFloat().put(2.4f);
         float myFloat = datastore.myFloat().get(-1);
-        Log.d("APP", "" + myFloat);
+        Log.d(TAG, "" + myFloat);
 
         datastore.myLong().put(Long.MAX_VALUE);
         long myLong = datastore.myLong().get(-1);
-        Log.d("APP", "" + myLong);
+        Log.d(TAG, "" + myLong);
 
         datastore.myBoolean().put(true);
         boolean mybool = datastore.myBoolean().get(false);
-        Log.d("APP", "" + mybool);
+        Log.d(TAG, "" + mybool);
 
         MyModel model = new MyModel("derp", 42);
         datastore.myModel().put(model);
         MyModel pulledModel = datastore.myModel().get();
-        Log.d("APP", pulledModel.toString());
+        Log.d(TAG, pulledModel.toString());
     }
 
     @Override

@@ -12,6 +12,9 @@ import com.lacronicus.easydatastorelib.StringEntry;
  * Created by fdoyle on 7/10/15.
  */
 public interface MyDatastore {
+
+    StringEntry myPrefWithNoExplicitName();
+
     @Preference("foo")
     StringEntry foo();
 
