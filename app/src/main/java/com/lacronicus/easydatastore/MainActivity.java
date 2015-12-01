@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.lacronicus.easydatastorelib.DatastoreBuilder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -46,7 +50,18 @@ public class MainActivity extends ActionBarActivity {
         datastore.myModel().put(model);
         MyModel pulledModel = datastore.myModel().get();
         Log.d("APP", pulledModel.toString());
+
+        MyModel listModel1 = new MyModel("foo", 1);
+        MyModel listModel2 = new MyModel("foo", 2);
+        MyModel listModel3 = new MyModel("foo", 3);
+        List<MyModel> models = Arrays.asList(listModel1, listModel2, listModel3);
+        datastore.myModelList().put(models);
+        models = datastore.myModelList().get();
+        for(MyModel m : models) {
+            Log.d("APP", m.toString());
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

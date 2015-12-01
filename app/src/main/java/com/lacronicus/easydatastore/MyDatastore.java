@@ -8,6 +8,9 @@ import com.lacronicus.easydatastorelib.ObjectEntry;
 import com.lacronicus.easydatastorelib.Preference;
 import com.lacronicus.easydatastorelib.StringEntry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by fdoyle on 7/10/15.
  */
@@ -32,4 +35,7 @@ public interface MyDatastore {
 
     @Preference("object")
     ObjectEntry<MyModel> myModel();
+
+    @Preference("list")
+    ObjectEntry<List<MyModel>> myModelList();
 }

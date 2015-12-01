@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by fdoyle on 7/10/15.
  */
@@ -11,12 +13,12 @@ public class ObjectEntry<T> {
     SharedPreferences preferences;
     String key;
     Gson gson;
-    Class<T> type;
-    public ObjectEntry(Class<T> type, Gson gson, SharedPreferences preferences, String key) {
+    Type type;
+    public ObjectEntry( Type type, Gson gson, SharedPreferences preferences, String key) {
         this.preferences = preferences;
         this.key = key;
-        this.type = type;
         this.gson = gson;
+        this.type = type;
     }
 
     public T get() {

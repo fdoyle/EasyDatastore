@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 
 /**
  * Created by fdoyle on 7/10/15.
@@ -57,9 +58,9 @@ public class DatastoreBuilder {
                 return new BooleanEntry(preferences, key);
             } else if (method.getReturnType().equals(ObjectEntry.class)) {
                 if(method.getGenericReturnType() instanceof ParameterizedType) {
-                    ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
-                    Class<?> type = (Class) parameterizedType.getActualTypeArguments()[0];
-                    return new ObjectEntry<>(type, gson, preferences, key);
+                    ParameterizedType containerType = (ParameterizedType) method.getGenericReturnType();
+                    Type typeArgument = containerType.getActualTypeArguments()[0];
+                    return new ObjectEntry<>(typeArgument, gson, preferences, key);
                 }
                 throw new RuntimeException("ObjectEntries must have a parameter");
             } else {
