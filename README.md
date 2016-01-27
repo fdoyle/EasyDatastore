@@ -52,7 +52,7 @@ datastore.bar().put("Hello World");
 String bar = datastore.bar().get();
 ```
 
-It now also supports all your basic types (String, int, boolean, float, long) as well as Objects via gson. 
+It now also supports all your basic types (`String`, `int`, `boolean`, `float`, `long`) as well as Objects via gson. 
 
 # Todo:
 * multiple changes in a single apply?
